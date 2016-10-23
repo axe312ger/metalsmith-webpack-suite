@@ -1,0 +1,66 @@
+{
+  "name": "metalsmith-webpack-suite",
+  "version": "0.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "build": "npm run build:webpack && npm run build:metalsmith",
+    "build:metalsmith": "babel-node src/scripts/build-metalsmith.js",
+    "build:webpack": "rimraf dist/assets/* && babel-node src/scripts/build-webpack.js",
+    "build:production": "cross-env NODE_ENV=production npm run build",
+    "lint": "eslint src test",
+    "test": "npm run lint && npm run test:coverage",
+    "test:coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --check-coverage --lines 100 npm run test:unit",
+    "test:unit": "cross-env NODE_ENV=test ava --verbose",
+    "test:unit:watch": "cross-env NODE_ENV=test ava --verbose -s --watch",
+    "preversion": "npm test",
+    "version": "npm run build && git add -f dist",
+    "postversion": "git push && git push --tags",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "repository": {
+    "url": "https://github.com/axe312ger/metalsmith-webpack-bundle.git",
+    "type": "git"
+  },
+  "keywords": [
+    "metalsmith",
+    "webpack"
+  ],
+  "author": "Benedikt Rötsch <info@benedikt-roetsch.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/axe312ger/metalsmith-webpack-bundle/issues"
+  },
+  "homepage": "https://github.com/axe312ger/metalsmith-webpack-bundle#readme",
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "babel-cli": "^6.16.0",
+    "babel-core": "^6.17.0",
+    "babel-eslint": "^7.0.0",
+    "babel-plugin-istanbul": "^2.0.3",
+    "babel-preset-es2015-node6": "^0.3.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "condition-circle": "^1.5.0",
+    "cross-env": "^3.1.3",
+    "cz-conventional-changelog": "^1.2.0",
+    "eslint": "^3.8.1",
+    "eslint-config-standard": "^6.2.0",
+    "eslint-plugin-babel": "^3.3.0",
+    "eslint-plugin-promise": "^3.3.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "nyc": "^8.3.1",
+    "semantic-release": "^4.3.5",
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
+    "assets-webpack-plugin": "^3.5.0",
+    "babel-loader": "^6.2.5",
+    "css-loader": "^0.25.0",
+    "koa": "^1.2.4",
+    "metalsmith": "^2.2.0",
+    "metalsmith-markdown": "^0.2.1",
+    "rimraf": "^2.5.4",
+    "webpack": "^1.13.2"
+  }
+}
