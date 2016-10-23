@@ -33,15 +33,18 @@
   },
   "homepage": "https://github.com/axe312ger/metalsmith-webpack-bundle#readme",
   "devDependencies": {
+    "assets-webpack-plugin": "^3.5.0",
     "ava": "^0.16.0",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.0.0",
+    "babel-loader": "^6.2.5",
     "babel-plugin-istanbul": "^2.0.3",
     "babel-preset-es2015-node6": "^0.3.0",
     "babel-preset-stage-0": "^6.16.0",
     "condition-circle": "^1.5.0",
     "cross-env": "^3.1.3",
+    "css-loader": "^0.25.0",
     "cz-conventional-changelog": "^1.2.0",
     "eslint": "^3.8.1",
     "eslint-config-standard": "^6.2.0",
@@ -49,18 +52,17 @@
     "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-standard": "^2.0.1",
     "extract-text-webpack-plugin": "^1.0.1",
+    "koa": "^1.2.4",
+    "metalsmith": "^2.2.0",
+    "metalsmith-assets": "^0.1.0",
+    "metalsmith-markdown": "^0.2.1",
     "nyc": "^8.3.1",
+    "rimraf": "^2.5.4",
     "semantic-release": "^4.3.5",
+    "webpack": "^1.13.2",
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "assets-webpack-plugin": "^3.5.0",
-    "babel-loader": "^6.2.5",
-    "css-loader": "^0.25.0",
-    "koa": "^1.2.4",
-    "metalsmith": "^2.2.0",
-    "metalsmith-markdown": "^0.2.1",
-    "rimraf": "^2.5.4",
-    "webpack": "^1.13.2"
+    "assets-webpack-plugin": "^3.5.0"
   }
 }

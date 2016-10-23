@@ -2,24 +2,22 @@ import { join } from 'path'
 
 // import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
-
+import AssetsPlugin from 'assets-webpack-plugin'
 import paths from './paths'
 
 const __DEV__ = process.env.NODE_ENV !== 'production'
 
 module.exports = {
   entry: {
-    header: join(paths.webpackSource, 'js', 'header.js'),
-    body: join(paths.webpackSource, 'js', 'body.js'),
+    head: join(paths.webpackSource, 'js', 'head.js'),
+    page: join(paths.webpackSource, 'js', 'page.js'),
     styles: join(paths.webpackSource, 'css', 'page.css')
   },
-  devtool: __DEV__ ? '#eval-source-map' : false,
+  devtool: __DEV__ ? '#cheap-module-eval-source-map' : false,
   output: {
     path: paths.webpackDestination,
     publicPath: paths.webpackPublicPath,
-    filename: '[name]-[hash].js',
-    libraryTarget: 'var',
-    library: 'page'
+    filename: '[name]-[hash].js'
   },
   // devServer: {
   //   contentBase: paths.distribution,
@@ -50,6 +48,10 @@ module.exports = {
     ]
   },
   plugins: [
+    new AssetsPlugin({
+      path: paths.webpackDestination,
+      prettyPrint: __DEV__
+    }),
     new ExtractTextPlugin('page.css', {
       allChunks: true
     })
