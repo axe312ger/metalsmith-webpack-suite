@@ -11,5 +11,6 @@ export default {
   metalsmithDestination: join('dist', 'site'),
   webpackSource: join(projectRoot, 'src', 'assets'),
   webpackDestination: join(projectRoot, 'dist', 'assets'),
-  webpackPublicPath: __DEV__ ? '/assets/' : '/bewusst-wie/assets/'
+  webpackPublicPath: __DEV__ ? '/assets/' : '/bewusst-wie/assets/',
+  serverRoot: join(projectRoot, 'dist', 'site')
 }

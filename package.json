@@ -8,6 +8,7 @@
     "build:metalsmith": "babel-node src/scripts/build-metalsmith.js",
     "build:webpack": "rimraf dist/assets/* && babel-node src/scripts/build-webpack.js",
     "build:production": "cross-env NODE_ENV=production npm run build",
+    "server": "babel-node src/scripts/run-server.js",
     "lint": "eslint src test",
     "test": "npm run lint && npm run test:coverage",
     "test:coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --check-coverage --lines 100 npm run test:unit",
@@ -52,10 +53,8 @@
     "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-standard": "^2.0.1",
     "extract-text-webpack-plugin": "^1.0.1",
-    "koa": "^1.2.4",
     "metalsmith": "^2.2.0",
     "metalsmith-assets": "^0.1.0",
-    "metalsmith-markdown": "^0.2.1",
     "nyc": "^8.3.1",
     "rimraf": "^2.5.4",
     "semantic-release": "^4.3.5",
@@ -63,6 +62,8 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "assets-webpack-plugin": "^3.5.0"
+    "assets-webpack-plugin": "^3.5.0",
+    "express": "^4.14.0",
+    "metalsmith-markdownit": "^0.4.0"
   }
 }
