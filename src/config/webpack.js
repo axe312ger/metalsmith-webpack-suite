@@ -1,6 +1,6 @@
 import { join } from 'path'
 
-// import webpack from 'webpack'
+import Webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import AssetsPlugin from 'assets-webpack-plugin'
 import paths from './paths'
@@ -17,7 +17,9 @@ module.exports = {
   output: {
     path: paths.webpackDestination,
     publicPath: paths.webpackPublicPath,
-    filename: '[name]-[hash].js'
+    filename: '[name]-[hash].js',
+    libraryTarget: 'umd',
+    library: 'Page'
   },
   // devServer: {
   //   contentBase: paths.distribution,
@@ -41,19 +43,25 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract([
-          'css-loader'
-        ])
+        // loader: ExtractTextPlugin.extract([
+        //   'css-loader'
+        // ])
+        loader: 'css-loader'
       }
     ]
   },
   plugins: [
     new AssetsPlugin({
       path: paths.webpackDestination,
-      prettyPrint: __DEV__
+      prettyPrint: __DEV__,
+      includeManifest: 'loader.js'
     }),
-    new ExtractTextPlugin('page.css', {
-      allChunks: true
+    // Only add this for dev
+    new Webpack.optimize.CommonsChunkPlugin('loader.js', {
+      names: ['head', 'page', 'styles']
     })
+    // new ExtractTextPlugin('page.css', {
+    //   allChunks: true
+    // })
   ]
 }
