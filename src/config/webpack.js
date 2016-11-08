@@ -17,24 +17,8 @@ module.exports = {
   output: {
     path: paths.webpackDestination,
     publicPath: paths.webpackPublicPath,
-    filename: '[name]-[hash].js',
-    libraryTarget: 'umd',
-    library: 'Page'
+    filename: '[name]-[hash].js'
   },
-  // devServer: {
-  //   contentBase: paths.distribution,
-  //   publicPath: paths.assetsPublicPath,
-  //   path: join(paths.distribution, 'assets'),
-  //   lazy: false,
-  //   hot: false,
-  //   inline: false,
-  //   quiet: false,
-  //   noInfo: false,
-  //   stats: {
-  //     colors: true,
-  //     chunks: false
-  //   }
-  // },
   module: {
     loaders: [
       {
@@ -43,25 +27,23 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        // loader: ExtractTextPlugin.extract([
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        // loaders: [
+        //   'style-loader',
         //   'css-loader'
-        // ])
-        loader: 'css-loader'
+        // ]
       }
     ]
   },
   plugins: [
+    new Webpack.optimize.CommonsChunkPlugin({
+      name: 'loader',
+      chunks: ['head', 'page', 'styles']
+    }),
+    new ExtractTextPlugin('page-[hash].css'),
     new AssetsPlugin({
       path: paths.webpackDestination,
-      prettyPrint: __DEV__,
-      includeManifest: 'loader.js'
-    }),
-    // Only add this for dev
-    new Webpack.optimize.CommonsChunkPlugin('loader.js', {
-      names: ['head', 'page', 'styles']
+      prettyPrint: __DEV__
     })
-    // new ExtractTextPlugin('page.css', {
-    //   allChunks: true
-    // })
   ]
 }

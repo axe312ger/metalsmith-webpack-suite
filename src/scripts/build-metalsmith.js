@@ -5,7 +5,7 @@ import assets from 'metalsmith-assets'
 import paths from '../config/paths'
 
 module.exports = new Metalsmith(paths.projectRoot)
-  // .clean(false) reenable for cache plugin
+  .clean(false)
   .source(paths.metalsmithSource)
   .destination(paths.metalsmithDestination)
   .use(markdown({
@@ -22,6 +22,16 @@ module.exports = new Metalsmith(paths.projectRoot)
     if (assets.hasOwnProperty('loader')) {
       assetsHead.push(`<script src="${assets.loader.js}"></script>`)
       delete assets.loader
+    }
+
+    if (assets.hasOwnProperty('styles')) {
+      if (assets.styles.hasOwnProperty('css')) {
+        assetsHead.push(`<link rel="stylesheet" href="${assets.styles.css}"/>`)
+      } else {
+        assetsHead.push(`<script src="${assets.styles.js}"></script>`)
+      }
+
+      delete assets.styles
     }
 
     assetsHead.push(`<script src="${assets.head.js}"></script>`)
