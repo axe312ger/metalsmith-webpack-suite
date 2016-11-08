@@ -3,6 +3,8 @@ import { join } from 'path'
 import Webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import AssetsPlugin from 'assets-webpack-plugin'
+import WriteFilePlugin from 'write-file-webpack-plugin'
+
 import paths from './paths'
 
 const __DEV__ = process.env.NODE_ENV !== 'production'
@@ -28,10 +30,6 @@ module.exports = {
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
-        // loaders: [
-        //   'style-loader',
-        //   'css-loader'
-        // ]
       }
     ]
   },
@@ -44,6 +42,8 @@ module.exports = {
     new AssetsPlugin({
       path: paths.webpackDestination,
       prettyPrint: __DEV__
-    })
+    }),
+    // Make sure everything is written to disk in dev, otherwise metalsmith would fail
+    new WriteFilePlugin()
   ]
 }

@@ -54,19 +54,19 @@
     "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-standard": "^2.0.1",
     "extract-text-webpack-plugin": "^1.0.1",
-    "metalsmith": "^2.2.0",
-    "metalsmith-assets": "^0.1.0",
     "nyc": "^8.3.1",
     "rimraf": "^2.5.4",
     "semantic-release": "^4.3.5",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.16.2"
+    "webpack-dev-middleware": "^1.8.4",
+    "write-file-webpack-plugin": "^3.4.2"
   },
   "dependencies": {
-    "assets-webpack-plugin": "^3.5.0",
     "express": "^4.14.0",
+    "metalsmith": "^2.2.0",
+    "metalsmith-assets": "^0.1.0",
     "metalsmith-markdownit": "^0.4.0",
-    "webpack-dev-server": "^1.16.2"
+    "metalsmith-watch": "^1.0.3"
   }
 }

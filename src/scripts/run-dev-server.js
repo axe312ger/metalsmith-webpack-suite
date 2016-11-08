@@ -1,30 +1,49 @@
-import Webpack from 'webpack'
-import WebpackDevServer from 'webpack-dev-server'
+import http from 'http'
+import { watch } from 'fs'
+
+import express from 'express'
+import webpack from 'webpack'
+import webpackMiddleware from 'webpack-dev-middleware'
 import webpackConfig from '../config/webpack'
 
-webpackConfig.entry.app = [
-  'webpack-dev-server/client?http://localhost:8080/',
-  'webpack/hot/dev-server'
-]
-webpackConfig.plugins.unshift(new Webpack.HotModuleReplacementPlugin())
+import metalsmith from './metalsmith'
 
-webpackConfig.output.filename = '[name]-nodeapi.js'
+import paths from '../config/paths'
 
-const compiler = Webpack(webpackConfig)
+const app = express()
 
-const server = new WebpackDevServer(compiler, {
-  publicPath: 'http://localhost:8080/assets/', // webpackConfig.output.publicPath,
-  webpackDestination: webpackConfig.output.publicPath,
-  hot: true,
+const webpackCompiler = webpack(webpackConfig)
+const webpackMiddlewareInstance = webpackMiddleware(webpackCompiler, {
+  publicPath: webpackConfig.output.publicPath,
+  noInfo: false,
   stats: {
-    colors: true
-  },
-  proxy: {
-    // [/^(?!\/assets\/).*/]: 'http://localhost:3000',
-    '**': 'http://localhost:3000'
+    colors: true,
+    chunks: false
   }
 })
 
-server.listen(8080, '127.0.0.1', function () {
-  console.log('Starting server on http://localhost:8080')
+function buildMetalsmith () {
+  metalsmith.build((err) => {
+    if (err) {
+      throw err
+    }
+
+    http.get('http://localhost:35729/changed?files=*.html')
+    console.log('Metalsmith build finished! Live reload was called.')
+  })
+}
+
+app.use(webpackMiddlewareInstance)
+app.use(express.static(paths.serverRoot))
+
+// Since there is no reliable way to find out when the dev middleware is finished,
+// we watch the resulting webpack-assets.json for changes.
+watch(paths.webpackDestination, (eventType, filename) => {
+  if (filename === 'webpack-assets.json') {
+    buildMetalsmith()
+  }
+})
+
+app.listen(3000, function () {
+  console.log('Development server startet at http://localhost:3000')
 })
