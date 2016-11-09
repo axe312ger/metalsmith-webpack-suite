@@ -5,16 +5,16 @@
   "main": "",
   "scripts": {
     "build": "npm run build:webpack && npm run build:metalsmith",
+    "build:prod": "cross-env NODE_ENV=production npm run build",
     "build:metalsmith": "babel-node src/scripts/build-metalsmith.js",
-    "build:webpack": "rimraf dist/assets/* && babel-node src/scripts/build-webpack.js",
-    "build:production": "cross-env NODE_ENV=production npm run build",
-    "dev": "babel-node src/scripts/run-dev-server.js",
-    "server": "babel-node src/scripts/run-server.js",
+    "build:webpack": "npm run clean:webpack && babel-node src/scripts/build-webpack.js",
+    "clean": "npm run clean:metalsmith && npm run clean:webpack",
+    "clean:metalsmith": "rimraf dist/site/*",
+    "clean:webpack": "rimraf dist/assets/*",
+    "dev": "npm run clean && cross-env DEBUG=metalsmith* babel-node src/scripts/run-dev-server.js",
+    "server": "node src/scripts/run-server.js",
     "lint": "eslint src test",
-    "test": "npm run lint && npm run test:coverage",
-    "test:coverage": "cross-env NODE_ENV=test nyc --reporter=lcov --reporter=text --check-coverage --lines 100 npm run test:unit",
-    "test:unit": "cross-env NODE_ENV=test ava --verbose",
-    "test:unit:watch": "cross-env NODE_ENV=test ava --verbose -s --watch",
+    "test": "npm run lint",
     "preversion": "npm test",
     "version": "npm run build && git add -f dist",
     "postversion": "git push && git push --tags",
@@ -34,9 +34,22 @@
     "url": "https://github.com/axe312ger/metalsmith-webpack-bundle/issues"
   },
   "homepage": "https://github.com/axe312ger/metalsmith-webpack-bundle#readme",
+  "files": [
+    "src",
+    "dist",
+    "README.md",
+    "CONTRIBUTING.md"
+  ],
+  "release": {
+    "verifyConditions": "condition-circle"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
   "devDependencies": {
     "assets-webpack-plugin": "^3.5.0",
-    "ava": "^0.16.0",
     "babel-cli": "^6.16.0",
     "babel-core": "^6.17.0",
     "babel-eslint": "^7.0.0",
@@ -54,7 +67,10 @@
     "eslint-plugin-promise": "^3.3.0",
     "eslint-plugin-standard": "^2.0.1",
     "extract-text-webpack-plugin": "^1.0.1",
-    "nyc": "^8.3.1",
+    "metalsmith": "^2.2.0",
+    "metalsmith-assets": "^0.1.0",
+    "metalsmith-markdownit": "^0.4.0",
+    "metalsmith-watch": "^1.0.3",
     "rimraf": "^2.5.4",
     "semantic-release": "^4.3.5",
     "style-loader": "^0.13.1",
@@ -63,10 +79,6 @@
     "write-file-webpack-plugin": "^3.4.2"
   },
   "dependencies": {
-    "express": "^4.14.0",
-    "metalsmith": "^2.2.0",
-    "metalsmith-assets": "^0.1.0",
-    "metalsmith-markdownit": "^0.4.0",
-    "metalsmith-watch": "^1.0.3"
+    "express": "^4.14.0"
   }
 }

@@ -8,8 +8,9 @@ import WriteFilePlugin from 'write-file-webpack-plugin'
 import paths from './paths'
 
 const __DEV__ = process.env.NODE_ENV !== 'production'
+const __PROD__ = process.env.NODE_ENV === 'production'
 
-module.exports = {
+const config = {
   entry: {
     head: join(paths.webpackSource, 'js', 'head.js'),
     page: join(paths.webpackSource, 'js', 'page.js'),
@@ -34,16 +35,35 @@ module.exports = {
     ]
   },
   plugins: [
-    new Webpack.optimize.CommonsChunkPlugin({
-      name: 'loader',
-      chunks: ['head', 'page', 'styles']
-    }),
     new ExtractTextPlugin('page-[hash].css'),
     new AssetsPlugin({
       path: paths.webpackDestination,
       prettyPrint: __DEV__
     }),
     // Make sure everything is written to disk in dev, otherwise metalsmith would fail
-    new WriteFilePlugin()
+    new WriteFilePlugin({
+      test: /\.json$/,
+      log: false
+    })
   ]
 }
+
+if (__DEV__) {
+  config.plugins.push(new Webpack.optimize.CommonsChunkPlugin({
+    name: 'loader',
+    chunks: ['head', 'page', 'styles']
+  }))
+}
+
+if (__PROD__) {
+  config.plugins.push(new Webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': JSON.stringify('production')
+    }
+  }))
+  config.plugins.push(new Webpack.optimize.AggressiveMergingPlugin())
+  config.plugins.push(new Webpack.optimize.DedupePlugin())
+  config.plugins.push(new Webpack.optimize.UglifyJsPlugin())
+}
+
+export default config

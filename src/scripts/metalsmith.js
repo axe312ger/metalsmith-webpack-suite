@@ -6,13 +6,16 @@ import assets from 'metalsmith-assets'
 import paths from '../config/paths'
 
 const __DEV__ = process.env.NODE_ENV !== 'production'
+const __PROD__ = process.env.NODE_ENV === 'production'
 
 const devOnly = (plugin, config) => {
-  return __DEV__ ? plugin(config) : false
+  return __DEV__ ? plugin(config) : (files, metalsmith, done) => {
+    done()
+  }
 }
 
 export default new Metalsmith(paths.projectRoot)
-  .clean(!__DEV__)
+  .clean(__PROD__)
   .source(paths.metalsmithSource)
   .destination(paths.metalsmithDestination)
   .use(devOnly(watch, {
