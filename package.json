@@ -21,7 +21,7 @@
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
-    "url": "https://github.com/axe312ger/metalsmith-webpack-bundle.git",
+    "url": "https://github.com/axe312ger/metalsmith-webpack-suite.git",
     "type": "git"
   },
   "keywords": [
@@ -31,9 +31,9 @@
   "author": "Benedikt Rötsch <info@benedikt-roetsch.de>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/axe312ger/metalsmith-webpack-bundle/issues"
+    "url": "https://github.com/axe312ger/metalsmith-webpack-suite/issues"
   },
-  "homepage": "https://github.com/axe312ger/metalsmith-webpack-bundle#readme",
+  "homepage": "https://github.com/axe312ger/metalsmith-webpack-suite#readme",
   "files": [
     "src",
     "dist",
