@@ -23,19 +23,26 @@ const config = {
     filename: '[name]-[hash].js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         loader: 'babel-loader'
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader',
+          publicPath: '/dist' // Overrides output.publicPath
+        })
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin('page-[hash].css'),
+    new ExtractTextPlugin({
+      filename: 'page-[hash].css',
+      allChunks: true
+    }),
     new AssetsPlugin({
       path: paths.webpackDestination,
       prettyPrint: __DEV__
@@ -44,6 +51,9 @@ const config = {
     new WriteFilePlugin({
       test: /\.json$/,
       log: false
+    }),
+    new Webpack.LoaderOptionsPlugin({
+      debug: true
     })
   ]
 }
@@ -56,13 +66,15 @@ if (__DEV__) {
 }
 
 if (__PROD__) {
+  config.plugins.push(new Webpack.LoaderOptionsPlugin({
+    minimize: true
+  }))
   config.plugins.push(new Webpack.DefinePlugin({
     'process.env': {
       'NODE_ENV': JSON.stringify('production')
     }
   }))
   config.plugins.push(new Webpack.optimize.AggressiveMergingPlugin())
-  config.plugins.push(new Webpack.optimize.DedupePlugin())
   config.plugins.push(new Webpack.optimize.UglifyJsPlugin())
 }
 
