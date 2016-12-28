@@ -66,7 +66,7 @@
     "eslint-plugin-babel": "^4.0.0",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^2.0.1",
-    "extract-text-webpack-plugin": "^1.0.1",
+    "extract-text-webpack-plugin": "v2.0.0-beta.4",
     "metalsmith": "^2.2.0",
     "metalsmith-assets": "^0.1.0",
     "metalsmith-markdownit": "^0.4.0",
@@ -74,7 +74,7 @@
     "rimraf": "^2.5.4",
     "semantic-release": "^6.3.2",
     "style-loader": "^0.13.1",
-    "webpack": "^1.14.0",
+    "webpack": "^2.2.0-rc.0",
     "webpack-dev-middleware": "^1.9.0",
     "write-file-webpack-plugin": "^3.4.2"
   },
