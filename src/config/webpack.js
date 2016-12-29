@@ -32,8 +32,7 @@ const config = {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',
-          loader: 'css-loader',
-          publicPath: '/dist' // Overrides output.publicPath
+          loader: 'css-loader'
         })
       }
     ]

@@ -1,8 +1,11 @@
+import Debug from 'debug'
 import metalsmith from './metalsmith'
+
+const debug = Debug('server-webpack')
 
 metalsmith.build(function (err) {
   if (err) {
     throw err
   }
-  console.log('Metalsmith build finished!')
+  debug('Metalsmith build finished!')
 })
