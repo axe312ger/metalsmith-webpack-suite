@@ -5,6 +5,10 @@
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](https://axe312.mit-license.org)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+[![Build Status](https://img.shields.io/circleci/project/axe312ger/metalsmith-webpack-suite.svg?maxAge=2592000)](https://circleci.com/gh/axe312ger/metalsmith-webpack-suite)
+[![bitHound Code](https://www.bithound.io/github/axe312ger/metalsmith-webpack-suite/badges/code.svg)](https://www.bithound.io/github/axe312ger/metalsmith-webpack-suite)
+[![semantic-release](https://img.shields.io/badge/%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 The project uses webpack features like chunking to allow metalsmith
 to inject the scripts and styles in the DOM where they actually belong. These
