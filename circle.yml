@@ -3,7 +3,7 @@ machine:
     version: "6"
 test:
   override:
-    - npm test
+    - npm run lint
+    - npm run build
   post:
-    - npm run build:prod
     - npm run semantic-release || true
