@@ -1,6 +1,12 @@
+import webpack from 'webpack'
+import Debug from 'debug'
+
+const debug = Debug('server-webpack')
 import webpackConfig from '../config/webpack'
 
-import webpack from 'webpack'
+function displayStats (stats) {
+  debug(stats.toString({colors: true}))
+}
 
 webpack(webpackConfig, function (err, stats) {
   if (err) {
@@ -9,7 +15,7 @@ webpack(webpackConfig, function (err, stats) {
 
   const jsonStats = stats.toJson()
   if (jsonStats.errors.length > 0) {
-    console.log(stats.toString({colors: true}))
+    displayStats(stats)
     throw new Error('Webpack build failed!')
   }
 
@@ -17,6 +23,6 @@ webpack(webpackConfig, function (err, stats) {
     console.error(jsonStats.warnings)
   }
 
-  console.log(stats.toString({colors: true}))
-  console.log('Webpacked build finished!')
+  displayStats(stats)
+  debug('Webpacked build finished!')
 })
