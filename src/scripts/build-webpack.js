@@ -1,8 +1,9 @@
 import webpack from 'webpack'
 import Debug from 'debug'
 
+import webpackConfig from '../../webpack.config.js'
+
 const debug = Debug('server-webpack')
-import webpackConfig from '../config/webpack'
 
 function displayStats (stats) {
   debug(stats.toString({colors: true}))

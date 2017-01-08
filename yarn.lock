@@ -1436,6 +1436,12 @@ debug@^2.1.1, debug@^2.2.0, debug@^2.5.2:
   dependencies:
     ms "0.7.2"
 
+debug@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.0.tgz#bc596bcabe7617f11d9fa15361eded5608b8499b"
+  dependencies:
+    ms "0.7.2"
+
 debug@~2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.0.0.tgz#89bd9df6732b51256bc6705342bba02ed12131ef"
@@ -1937,6 +1943,10 @@ find-cache-dir@^0.1.1:
     commondir "^1.0.1"
     mkdirp "^0.5.1"
     pkg-dir "^1.0.0"
+
+find-root@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/find-root/-/find-root-1.0.0.tgz#962ff211aab25c6520feeeb8d6287f8f6e95807a"
 
 find-up@^1.0.0, find-up@^1.1.2:
   version "1.1.2"
@@ -2661,6 +2671,10 @@ jsonify@~0.0.0:
 jsonpointer@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/jsonpointer/-/jsonpointer-4.0.0.tgz#6661e161d2fc445f19f98430231343722e1fcbd5"
+
+jsonschema@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.1.1.tgz#3cede8e3e411d377872eefbc9fdf26383cbc3ed9"
 
 jsprim@^1.2.2:
   version "1.3.1"
@@ -4274,6 +4288,15 @@ safe-env@1.2.0:
   dependencies:
     ramda "0.22.1"
 
+sane-config@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/sane-config/-/sane-config-0.1.2.tgz#661a9c0b97e6e2bff429f6aa06a823473d602929"
+  dependencies:
+    debug "^2.6.0"
+    find-root "^1.0.0"
+    jsonschema "^1.1.1"
+    yargs "^6.6.0"
+
 sax@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
@@ -5085,6 +5108,24 @@ yargs@^6.0.0:
     string-width "^1.0.2"
     which-module "^1.0.0"
     window-size "^0.2.0"
+    y18n "^3.2.1"
+    yargs-parser "^4.2.0"
+
+yargs@^6.6.0:
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-6.6.0.tgz#782ec21ef403345f830a808ca3d513af56065208"
+  dependencies:
+    camelcase "^3.0.0"
+    cliui "^3.2.0"
+    decamelize "^1.1.1"
+    get-caller-file "^1.0.1"
+    os-locale "^1.4.0"
+    read-pkg-up "^1.0.1"
+    require-directory "^2.1.1"
+    require-main-filename "^1.0.1"
+    set-blocking "^2.0.0"
+    string-width "^1.0.2"
+    which-module "^1.0.0"
     y18n "^3.2.1"
     yargs-parser "^4.2.0"
 

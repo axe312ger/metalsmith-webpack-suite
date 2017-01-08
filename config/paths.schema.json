@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "metalsmithSource": {
+      "type": "string"
+    },
+    "metalsmithDestination": {
+      "type": "string"
+    },
+    "webpackSource": {
+      "type": "string"
+    },
+    "webpackDestination": {
+      "type": "string"
+    },
+    "webpackPublicPath": {
+      "type": "string"
+    },
+    "serverRoot": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "metalsmithSource",
+    "metalsmithDestination",
+    "webpackSource",
+    "webpackDestination",
+    "webpackPublicPath",
+    "serverRoot"
+  ]
+}

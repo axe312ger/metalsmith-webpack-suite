@@ -3,7 +3,7 @@ import watch from 'metalsmith-watch'
 import markdown from 'metalsmith-markdownit'
 import assets from 'metalsmith-assets'
 
-import paths from '../config/paths'
+import { paths } from 'sane-config'
 
 const __DEV__ = process.env.NODE_ENV !== 'production'
 const __PROD__ = process.env.NODE_ENV === 'production'
