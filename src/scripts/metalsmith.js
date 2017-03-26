@@ -6,7 +6,7 @@ import assets from 'metalsmith-assets'
 
 import paths from '../config/paths'
 
-const __DEV__ = process.env.NODE_ENV !== 'production'
+const __DEV__ = process.env.NODE_ENV === 'development'
 const __PROD__ = process.env.NODE_ENV === 'production'
 
 const devOnly = (plugin, config) => {
@@ -36,28 +36,28 @@ export default new Metalsmith(paths.projectRoot)
 
     const assetsHead = []
     if (assets.hasOwnProperty('loader')) {
-      assetsHead.push(`<script src="${assets.loader.js}"></script>`)
+      assetsHead.push(`<script src="${paths.pageBasePath}${assets.loader.js}"></script>`)
       delete assets.loader
     }
 
     // Extract inline and extracted css
     if (assets.hasOwnProperty('styles')) {
       if (assets.styles.hasOwnProperty('css')) {
-        assetsHead.push(`<link rel="stylesheet" href="${assets.styles.css}"/>`)
+        assetsHead.push(`<link rel="stylesheet" href="${paths.pageBasePath}${assets.styles.css}"/>`)
       } else {
-        assetsHead.push(`<script src="${assets.styles.js}"></script>`)
+        assetsHead.push(`<script src="${paths.pageBasePath}${assets.styles.js}"></script>`)
       }
 
       delete assets.styles
     }
 
     // Extract wepack entry for head
-    assetsHead.push(`<script src="${assets.head.js}"></script>`)
+    assetsHead.push(`<script src="${paths.pageBasePath}${assets.head.js}"></script>`)
     delete assets.head
 
     // Gather all other entries for body
     const assetsBody = Object.keys(assets).map((asset) => {
-      return `<script src="${assets[asset].js}"></script>`
+      return `<script src="${paths.pageBasePath}${assets[asset].js}"></script>`
     })
 
     // Inject live reload for development
