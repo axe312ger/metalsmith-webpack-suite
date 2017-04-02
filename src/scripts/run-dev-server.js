@@ -5,7 +5,7 @@ import webpack from 'webpack'
 import webpackMiddleware from 'webpack-dev-middleware'
 
 import metalsmith from './metalsmith'
-import webpackConfig from '../config/webpack'
+import webpackConfig from '../../webpack.config.js'
 import paths from '../config/paths'
 
 function buildMetalsmith () {
