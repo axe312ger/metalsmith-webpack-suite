@@ -3,7 +3,7 @@ machine:
     version: "6"
 test:
   override:
-    - npm run lint
-    - npm run build
+    - npm run test
   post:
     - npm run semantic-release || true
+    - if [ "$CIRCLE_BRANCH" = "master" ]; then npm run deploy; fi || true
