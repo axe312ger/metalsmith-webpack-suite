@@ -1,6 +1,7 @@
 const Debug = require('debug')
 const express = require('express')
-const paths = require('../config/paths')
+
+const { paths } = require('sane-config')
 
 const debug = Debug('server-production')
 const app = express()
