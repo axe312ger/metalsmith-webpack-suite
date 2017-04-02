@@ -1,19 +1,13 @@
+// This is the actual metalsmith configuration script.
+// The relevant part is the webpack asset injection into the metalsmith pages.
 import Metalsmith from 'metalsmith'
-import watch from 'metalsmith-watch'
 import markdown from 'metalsmith-markdownit'
 import layouts from 'metalsmith-layouts'
 import assets from 'metalsmith-assets'
 
 import paths from '../config/paths'
 
-const __DEV__ = process.env.NODE_ENV === 'development'
 const __PROD__ = process.env.NODE_ENV === 'production'
-
-const devOnly = (plugin, config) => {
-  return __DEV__ ? plugin(config) : (files, metalsmith, done) => {
-    done()
-  }
-}
 
 let injectHeadAssets = () => 'noop-injectHeadAssets'
 let injectBodyAssets = () => 'noop-injectBodyAssets'
@@ -22,10 +16,6 @@ export default new Metalsmith(paths.projectRoot)
   .clean(__PROD__)
   .source(paths.metalsmithSource)
   .destination(paths.metalsmithDestination)
-  .use(devOnly(watch, {
-    livereload: true,
-    invalidateCache: true
-  }))
   .use(assets({
     source: './dist/assets',
     destination: './assets'
@@ -59,11 +49,6 @@ export default new Metalsmith(paths.projectRoot)
     const assetsBody = Object.keys(assets).map((asset) => {
       return `<script src="${paths.pageBasePath}${assets[asset].js}"></script>`
     })
-
-    // Inject live reload for development
-    if (__DEV__) {
-      assetsBody.push('<script src="http://localhost:35729/livereload.js"></script>')
-    }
 
     injectHeadAssets = () => {
       return assetsHead.join('\n')
