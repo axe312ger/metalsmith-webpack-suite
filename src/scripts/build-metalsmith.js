@@ -5,6 +5,7 @@ const debug = Debug('server-webpack')
 
 metalsmith.build(function (err) {
   if (err) {
+    debug(err)
     throw err
   }
   debug('Metalsmith build finished!')

@@ -1,16 +1,7 @@
-html {
-  font-family: sans-serif;
-}
+@import 'base.css';
 
-html.no-js body:before {
-  content: 'Javascript is disabled or not ready yet'
-}
-
-body {
-  padding: 5vw 5vh;
-}
-
-img, svg {
+img,
+svg {
   width: 100%;
   height: auto;
 }
@@ -24,15 +15,16 @@ img, svg {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10vh;
-}
 
-.logos .logo {
-  display: flex;
-  align-items: center;
-  flex: 0 1 40%;
-}
+  & .logo,
+  & f {
+    display: flex;
+    align-items: center;
+    flex: 0 1 40%;
+  }
 
-.logos .heart {
-  flex: 0 1 10%;
-  color: #f50000;
+  & .heart {
+    flex: 0 1 10%;
+    color: #f50000;
+  }
 }
