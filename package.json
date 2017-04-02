@@ -65,7 +65,7 @@
     "babel-preset-stage-0": "^6.16.0",
     "condition-circle": "^1.5.0",
     "css-loader": "^0.28.0",
-    "cz-conventional-changelog": "^1.2.0",
+    "cz-conventional-changelog": "^2.0.0",
     "debug": "^2.5.2",
     "eslint": "^3.18.0",
     "eslint-config-standard": "^7.1.0",
