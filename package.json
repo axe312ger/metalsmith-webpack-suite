@@ -22,7 +22,9 @@
     "preversion": "npm test",
     "version": "npm run build && git add -f dist",
     "postversion": "git push && git push --tags",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "precommit": "npm run lint",
+    "prepush": "npm run test"
   },
   "repository": {
     "url": "https://github.com/axe312ger/metalsmith-webpack-suite.git",
@@ -75,6 +77,7 @@
     "extract-text-webpack-plugin": "2.1.0",
     "gh-pages": "^0.12.0",
     "handlebars": "^4.0.6",
+    "husky": "^0.13.3",
     "metalsmith": "^2.2.0",
     "metalsmith-assets": "^0.1.0",
     "metalsmith-layouts": "^1.8.0",
