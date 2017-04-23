@@ -1,8 +1,6 @@
 const { join } = require('path')
-
 const Webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const AssetsPlugin = require('assets-webpack-plugin')
 const WriteFilePlugin = require('write-file-webpack-plugin')
 
 const paths = require('./src/config/paths')
@@ -12,15 +10,14 @@ const __PROD__ = process.env.NODE_ENV === 'production'
 
 const config = {
   entry: {
-    head: join(paths.webpackSource, 'js', 'head.js'),
-    page: join(paths.webpackSource, 'js', 'page.js'),
-    styles: join(paths.webpackSource, 'css', 'page.css')
+    immediate: join(paths.webpackSource, 'js', 'immediate.js'),
+    page: join(paths.webpackSource, 'js', 'page.js')
   },
   devtool: __DEV__ ? '#cheap-module-eval-source-map' : false,
   output: {
     path: paths.webpackDestination,
     publicPath: paths.webpackPublicPath,
-    filename: '[name]-[hash].js'
+    filename: '[name].js'
   },
   module: {
     rules: [
@@ -31,42 +28,26 @@ const config = {
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader'
-            },
-            {
-              loader: 'postcss-loader'
-            }
-          ]
+          use: ['css-loader', 'postcss-loader']
         })
       }
     ]
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: 'page-[hash].css',
+      filename: 'page.css',
       allChunks: true
-    }),
-    new AssetsPlugin({
-      path: paths.webpackDestination,
-      prettyPrint: __DEV__
-    }),
-    // Make sure everything is written to disk in dev, otherwise metalsmith would fail
-    new WriteFilePlugin({
-      test: /\.json$/,
-      log: false
-    }),
-    new Webpack.LoaderOptionsPlugin({
-      debug: true
     })
   ]
 }
 
 if (__DEV__) {
-  config.plugins.push(new Webpack.optimize.CommonsChunkPlugin({
-    name: 'loader',
-    chunks: ['head', 'page', 'styles']
+  config.plugins.push(new Webpack.LoaderOptionsPlugin({
+    debug: true
+  }))
+  // Force webpack-dev-middleware to write files to the disk for metalsmith
+  config.plugins.push(new WriteFilePlugin({
+    log: false
   }))
 }
 
