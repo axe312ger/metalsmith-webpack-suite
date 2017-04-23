@@ -1,13 +1,13 @@
 <html class="no-js">
   <head>
     <title>{{title}}</title>
-    {{{injectHeadAssets}}}
-    {{{injectBodyAssets}}}
+    <link rel="stylesheet" href="{{ fingerprint.[assets/page.css] }}"/>
+    <script src="{{ fingerprint.[assets/immediate.js] }}"></script>
+    <script src="{{ fingerprint.[assets/page.js] }}" defer></script>
   </head>
   <body>
     <div class="content">
       {{{contents}}}
     </div>
-    {{{injectBodyAssets}}}
   </body>
 </html>
