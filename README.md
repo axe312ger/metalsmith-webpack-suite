@@ -12,11 +12,11 @@
 
 ## :cloud: Installation
 
-Cloning the repo or downloading a release might be the best idea.
+Cloning the repo or downloading a release might be the best idea. This is a boilerplate, not a library.
 
 You may build on top of this project or extract parts you need for your own projects.
 
-Afterwars, simply install all dependencies by running:
+Afterwards, simply install all dependencies by running:
 
 ```js
 yarn || npm install
@@ -26,7 +26,7 @@ yarn || npm install
 
 This boilerplate tries to combine the best out of [metalsmith](http://www.metalsmith.io/) and [webpack](webpack.js.org).
 
-### Content generation via metalsmithpreviewp
+### Content generation via metalsmith
 
 * Simple, pretty much not special metalsmith implementation
 * [metalsmith-assets](https://github.com/treygriffith/metalsmith-assets) to copy webpack files
