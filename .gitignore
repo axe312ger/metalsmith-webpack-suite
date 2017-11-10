@@ -1,6 +1,11 @@
 # Project related
 dist
 
+# Let's avoid lock files since this is just a boilerplate
+# You might consider having them in your final project
+package-lock.json
+yarn.lock
+
 # Created by https://www.gitignore.io/api/osx,linux,windows,node
 
 ### OSX ###
