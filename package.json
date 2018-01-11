@@ -80,7 +80,7 @@
     "filesize": "^3.5.6",
     "gh-pages": "^1.0.0",
     "handlebars": "^4.0.6",
-    "http-server": "^0.10.0",
+    "http-server": "^0.11.0",
     "husky": "^0.14.3",
     "metalsmith": "^2.2.0",
     "metalsmith-assets": "^0.1.0",
